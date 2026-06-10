@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# eComrads Skills — universal installer.
+# Symlinks each ecomrads-* skill folder into the detected agent's skills dir.
+# Usage: ./setup [--host claude|cursor|codex] [--copy]
+set -euo pipefail
+
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILLS=(
+  ecomrads-product-photoshoot
+  ecomrads-product-video
+  ecomrads-ugc-video
+  ecomrads-static-ads
+  ecomrads-virality-analysis
+  ecomrads-competitor-spy
+)
+
+HOST=""
+MODE="link"   # link | copy
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --host) HOST="${2:-}"; shift 2 ;;
+    --copy) MODE="copy"; shift ;;
+    -h|--help) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "Unknown arg: $1" >&2; exit 1 ;;
+  esac
+done
+
+detect_host() {
+  [ -n "$HOST" ] && { echo "$HOST"; return; }
+  [ -d "$HOME/.claude" ] && { echo "claude"; return; }
+  [ -d "$HOME/.cursor" ] && { echo "cursor"; return; }
+  [ -d "$HOME/.codex"  ] && { echo "codex";  return; }
+  echo "claude"
+}
+
+target_dir() {
+  case "$1" in
+    claude) echo "$HOME/.claude/skills" ;;
+    cursor) echo "$HOME/.cursor/skills" ;;
+    codex)  echo "$HOME/.codex/skills"  ;;
+    *) echo "Unsupported host: $1" >&2; exit 1 ;;
+  esac
+}
+
+HOST="$(detect_host)"
+DEST="$(target_dir "$HOST")"
+mkdir -p "$DEST"
+
+echo "Installing eComrads skills → $DEST (host: $HOST, mode: $MODE)"
+for s in "${SKILLS[@]}"; do
+  src="$REPO_DIR/$s"
+  dst="$DEST/$s"
+  [ -d "$src" ] || { echo "  ! missing $s, skipping"; continue; }
+  rm -rf "$dst"
+  if [ "$MODE" = "copy" ]; then
+    cp -R "$src" "$dst"
+  else
+    ln -s "$src" "$dst"
+  fi
+  echo "  + $s"
+done
+
+cat <<'EOF'
+
+Done.
+
+Next: connect the eComrads MCP server in your agent (once):
+  URL: https://mcp.ecomrads.com/mcp
+  Then authorize in the browser with your eComrads account.
+
+Skills do nothing until the MCP server is connected.
+EOF

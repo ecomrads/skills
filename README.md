@@ -2,7 +2,7 @@
 
 **Generate scroll-stopping product ads, photoshoots, and videos — straight from your AI assistant.**
 
-eComrads MCP is a [Model Context Protocol](https://modelcontextprotocol.io) server that connects Claude, ChatGPT, Cursor, and any MCP‑compatible client to the [eComrads](https://ecomrads.com) creative engine. Upload a product photo and ask for a photoshoot, a UGC video, a static ad, or an Ad Score — the assistant does the rest.
+eComrads MCP is a [Model Context Protocol](https://modelcontextprotocol.io) server that connects Claude, ChatGPT, Cursor, and any MCP‑compatible client to the [eComrads](https://ecomrads.com) creative engine. Upload a product photo and ask for a photoshoot, a UGC video, a static ad, or a Virality Analysis — the assistant does the rest.
 
 > One image in → studio-grade creative out. No design tools, no prompt-guessing.
 
@@ -17,7 +17,7 @@ eComrads MCP is a [Model Context Protocol](https://modelcontextprotocol.io) serv
 | **Product video** | `product_video` | Animate a still product image into motion. |
 | **UGC-style video** | `ugc_video` | Creator-style, scripted videos with an actor/avatar. |
 | **Static ad creative** | `static_product_ad` | Slides / carousel-ready static ads. |
-| **Ad Score** | `analyze_ad` | Analyze an ad and return a scored creative breakdown. |
+| **Virality Analysis** | `analyze_ad` | Analyze an ad (image or video) and predict performance with a scored breakdown. |
 | **Competitor spy** | `competitor_spy_meta_library` | Research live & historical ads in the Meta Ads Library. |
 | **Recreate a winning ad** | `recreate_similar_ad` | Recreate a competitor-style ad using your product. |
 | **Job status** | `check_generation` | Poll a generation until it finishes (the assistant handles this for you). |
@@ -33,7 +33,7 @@ flowchart LR
     A[Your AI assistant] -- MCP / OAuth --> B[eComrads MCP]
     B -- Bearer JWT --> C[eComrads API]
     C --> D[Generation workers]
-    D --> E[Image / Video / Ad Score]
+    D --> E[Image / Video / Virality Analysis]
     E --> B --> A
 ```
 
@@ -84,6 +84,23 @@ npm start
 
 ---
 
+## Install Skills
+
+This folder is now publish-ready as a skills repo. Push **`~/Desktop/ecomrads-mcp-public`** to GitHub, then users can install with:
+
+```bash
+npx skills add <github-owner>/<repo>
+```
+
+or in Claude Code:
+
+```text
+/plugin marketplace add <github-owner>/<repo>
+/plugin install ecomrads@ecomrads
+```
+
+The skill folders are at the repo root (`ecomrads-product-photoshoot/`, `ecomrads-ugc-video/`, etc.), matching the Higgsfield-style layout.
+
 ## Get great results — Agent Skills
 
 The quality of generations depends on how prompts are constructed. This repo ships a portable **skills bundle** in **[`mcp-skills/`](./mcp-skills)** — a set of structured agent skills (one folder each, with a `SKILL.md`) that teach the assistant to:
@@ -97,9 +114,10 @@ The quality of generations depends on how prompts are constructed. This repo shi
 | Skill | For |
 |-------|-----|
 | `ecomrads-product-photoshoot` | Product images & edits (studio, lifestyle, hero, try-on, restyle) |
-| `ecomrads-product-video` | Image-to-video animation + UGC creator video |
+| `ecomrads-product-video` | Image-to-video animation of a product (no presenter) |
+| `ecomrads-ugc-video` | UGC creator video — testimonial, unboxing, how-to, vlog |
 | `ecomrads-static-ads` | Static / carousel ad creatives + recreate a competitor ad |
-| `ecomrads-ad-score` | Score a finished ad (image or video) |
+| `ecomrads-virality-analysis` | Analyze a finished ad (image or video) and predict performance |
 | `ecomrads-competitor-spy` | Meta Ads Library research |
 
 Shared behavior lives in [`mcp-skills/AGENTS.md`](./mcp-skills/AGENTS.md) and the prompt system in [`mcp-skills/references/prompting.md`](./mcp-skills/references/prompting.md). The `mcp-skills/` folder is self-contained — drop it into any skills directory or publish it on its own.

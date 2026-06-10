@@ -1,0 +1,47 @@
+{
+  "name": "ecomrads",
+  "owner": {
+    "name": "eComrads",
+    "url": "https://ecomrads.com"
+  },
+  "plugins": [
+    {
+      "name": "ecomrads",
+      "source": "./",
+      "description": "Product photoshoots, product & UGC ad videos, static ad creatives, Virality Analysis, and competitor research via the eComrads MCP server.",
+      "version": "0.2.0",
+      "skills": [
+        {
+          "name": "product-photoshoot",
+          "path": "ecomrads-product-photoshoot",
+          "invoke": "/ecomrads:product-photoshoot"
+        },
+        {
+          "name": "product-video",
+          "path": "ecomrads-product-video",
+          "invoke": "/ecomrads:product-video"
+        },
+        {
+          "name": "ugc-video",
+          "path": "ecomrads-ugc-video",
+          "invoke": "/ecomrads:ugc-video"
+        },
+        {
+          "name": "static-ads",
+          "path": "ecomrads-static-ads",
+          "invoke": "/ecomrads:static-ads"
+        },
+        {
+          "name": "virality-analysis",
+          "path": "ecomrads-virality-analysis",
+          "invoke": "/ecomrads:virality-analysis"
+        },
+        {
+          "name": "competitor-spy",
+          "path": "ecomrads-competitor-spy",
+          "invoke": "/ecomrads:competitor-spy"
+        }
+      ]
+    }
+  ]
+}
