@@ -2,8 +2,8 @@
   "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
   "name": "ecomrads",
   "displayName": "eComrads",
-  "version": "0.2.0",
-  "description": "Product photoshoots, product & UGC ad videos, static ad creatives, Virality Analysis, and Meta Ads Library research via the eComrads MCP server.",
+  "version": "0.3.0",
+  "description": "Product photoshoots, multi-angle storyboards, product & UGC ad videos, static ad creatives, Virality Analysis, and Meta Ads Library research via the eComrads MCP server.",
   "author": {
     "name": "eComrads",
     "email": "support@ecomrads.com"
@@ -16,6 +16,7 @@
   "keywords": [
     "ecomrads",
     "product-photoshoot",
+    "storyboard",
     "ad-creative",
     "ugc-video",
     "virality-analysis",

@@ -52,6 +52,20 @@ check_generation → poll ~45–60s
 
 UGC styles: `testimonial`, `unboxing`, `how_to_use`, `vlog_style`. Directions: `authentic`, `high_energy`, `asmr_calm`, `urgent_salesy`.
 
+## 4b. Multi-angle storyboard (ecomrads-storyboard)
+
+```
+upload → product image
+multi_angles → { "body": {
+  "image_urls": ["<upload url>"],
+  "aspect_ratio": "4:5", "resolution": "2K",
+  "prompt": "consistent studio lighting across all angles"
+} }
+check_generation → poll until COMPLETED   # produces 9 angle shots
+```
+
+`image_urls` accepts 1–2 references. Outputs 9 still angle shots (not video).
+
 ## 5. Static ad carousel (3 slides)
 
 ```
@@ -91,5 +105,6 @@ check_generation → poll, then deliver the plain-language Virality Analysis
 ## Chaining
 
 - **photoshoot → product-video / ugc-video:** generate a hero still, then animate it or use it as a UGC product reference.
+- **storyboard:** `multi_angles` → 9 angle shots of one product (stills).
 - **spy → static-ads:** use a spied ad as `ad_media_url` for `recreate_similar_ad`.
 - **any creative → virality-analysis:** validate the output before the user ships it.

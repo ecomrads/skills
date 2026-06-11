@@ -14,6 +14,7 @@ eComrads MCP is a [Model Context Protocol](https://modelcontextprotocol.io) serv
 |------------|------|--------------|
 | **Upload** | `upload` | Send an image (URL or paste) and get back a public link to use in any creative tool. |
 | **Product photoshoot / edits** | `edit_product_photo` | Relight, restyle, swap backgrounds, dress a model, or generate from a prompt. |
+| **Multi-angle storyboard** | `multi_angles` | Generate a 9-shot angle storyboard from a product image. |
 | **Product video** | `product_video` | Animate a still product image into motion. |
 | **UGC-style video** | `ugc_video` | Creator-style, scripted videos with an actor/avatar. |
 | **Static ad creative** | `static_product_ad` | Slides / carousel-ready static ads. |
@@ -39,7 +40,7 @@ flowchart LR
 
 - **The MCP server is a thin client.** All generation, credits, and AI providers live in the eComrads backend.
 - **Auth** uses your eComrads account (same sign-in as the web app), so your usage and credits are tied to you.
-- **Outputs are engineered, not guessed.** Prompts are expanded into a structured creative brief before generation (see [SKILLS.md](./SKILLS.md)).
+- **Outputs are engineered, not guessed.** Prompts are expanded into a structured creative brief before generation (see [references/prompting.md](./references/prompting.md)).
 
 ---
 
@@ -103,7 +104,7 @@ The skill folders are at the repo root (`ecomrads-product-photoshoot/`, `ecomrad
 
 ## Get great results — Agent Skills
 
-The quality of generations depends on how prompts are constructed. This repo ships a portable **skills bundle** in **[`mcp-skills/`](./mcp-skills)** — a set of structured agent skills (one folder each, with a `SKILL.md`) that teach the assistant to:
+The quality of generations depends on how prompts are constructed. This repo ships structured agent skills (one folder each, with a `SKILL.md`) that teach the assistant to:
 
 - act as a **creative director**, not a prompt-spammer,
 - expand short requests into a structured, layered creative brief,
@@ -111,16 +112,17 @@ The quality of generations depends on how prompts are constructed. This repo shi
 - run the upload → generate → deliver flow cleanly, and
 - show you the final media URL, not internal job chatter.
 
-| Skill | For |
-|-------|-----|
-| `ecomrads-product-photoshoot` | Product images & edits (studio, lifestyle, hero, try-on, restyle) |
-| `ecomrads-product-video` | Image-to-video animation of a product (no presenter) |
-| `ecomrads-ugc-video` | UGC creator video — testimonial, unboxing, how-to, vlog |
-| `ecomrads-static-ads` | Static / carousel ad creatives + recreate a competitor ad |
-| `ecomrads-virality-analysis` | Analyze a finished ad (image or video) and predict performance |
-| `ecomrads-competitor-spy` | Meta Ads Library research |
+| Skill | Invoke | For |
+|-------|--------|-----|
+| [`ecomrads-product-photoshoot`](./ecomrads-product-photoshoot) | `/ecomrads:product-photoshoot` | Product images & edits (studio, lifestyle, hero, try-on, restyle) |
+| [`ecomrads-storyboard`](./ecomrads-storyboard) | `/ecomrads:storyboard` | Multi-angle 9-shot product storyboard |
+| [`ecomrads-product-video`](./ecomrads-product-video) | `/ecomrads:product-video` | Image-to-video animation of a product (no presenter) |
+| [`ecomrads-ugc-video`](./ecomrads-ugc-video) | `/ecomrads:ugc-video` | UGC creator video — testimonial, unboxing, how-to, vlog |
+| [`ecomrads-static-ads`](./ecomrads-static-ads) | `/ecomrads:static-ads` | Static / carousel ad creatives + recreate a competitor ad |
+| [`ecomrads-virality-analysis`](./ecomrads-virality-analysis) | `/ecomrads:virality-analysis` | Analyze a finished ad (image or video) and predict performance |
+| [`ecomrads-competitor-spy`](./ecomrads-competitor-spy) | `/ecomrads:competitor-spy` | Meta Ads Library research |
 
-Shared behavior lives in [`mcp-skills/AGENTS.md`](./mcp-skills/AGENTS.md) and the prompt system in [`mcp-skills/references/prompting.md`](./mcp-skills/references/prompting.md). The `mcp-skills/` folder is self-contained — drop it into any skills directory or publish it on its own.
+Shared behavior lives in [`AGENTS.md`](./AGENTS.md) and the prompt system in [`references/prompting.md`](./references/prompting.md). See [`INSTALL.md`](./INSTALL.md) for all install methods and [`COOKBOOK.md`](./COOKBOOK.md) for recipes.
 
 ---
 
@@ -128,15 +130,14 @@ Shared behavior lives in [`mcp-skills/AGENTS.md`](./mcp-skills/AGENTS.md) and th
 
 ```
 .
-├── README.md          # this file
-├── mcp-skills/        # portable agent skills bundle (move/publish on its own)
-│   ├── README.md          # skills index + install
-│   ├── AGENTS.md          # shared behavior rules
-│   ├── COOKBOOK.md        # copy-paste recipes
-│   ├── references/        # prompting, upload, jobs
-│   └── ecomrads-*/        # one folder per skill (SKILL.md)
-├── .env.example       # configuration template (no secrets)
-└── src/               # MCP server (HTTP client + tool definitions)
+├── README.md            # this file
+├── INSTALL.md           # install methods + updating
+├── AGENTS.md            # shared behavior rules
+├── COOKBOOK.md          # copy-paste recipes
+├── setup                # clone + symlink installer
+├── .claude-plugin/ .cursor-plugin/ .codex-plugin/   # plugin manifests
+├── references/          # prompting, upload, jobs
+└── ecomrads-*/          # one folder per skill (SKILL.md)
 ```
 
 ---
@@ -145,5 +146,4 @@ Shared behavior lives in [`mcp-skills/AGENTS.md`](./mcp-skills/AGENTS.md) and th
 
 MIT — see `LICENSE`.
 
-> eComrads, the eComrads API, and generation models are operated by eComrads. This MCP server is the open client surface; it does not include backend business logic.
-# skills
+> eComrads, the eComrads API, and generation models are operated by eComrads. These skills are the open client surface; they do not include backend business logic.

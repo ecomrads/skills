@@ -14,7 +14,7 @@ or paste/attach the image bytes (the tool accepts an image the user shared in ch
 
 The tool returns a public URL. Use that exact link as:
 
-- `image_urls[]` → `edit_product_photo`, `ugc_video`
+- `image_urls[]` → `edit_product_photo`, `ugc_video`, `multi_angles` (1–2)
 - `first_frame_url` → `product_video`
 - `product_image_url` → `static_product_ad`, `recreate_similar_ad`
 - `media_url` → `analyze_ad`

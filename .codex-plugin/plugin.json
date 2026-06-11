@@ -1,13 +1,14 @@
 {
   "name": "ecomrads",
   "displayName": "eComrads",
-  "version": "0.2.0",
-  "description": "Product photoshoots, product & UGC ad videos, static ad creatives, Virality Analysis, and Meta Ads Library research via the eComrads MCP server.",
+  "version": "0.3.0",
+  "description": "Product photoshoots, multi-angle storyboards, product & UGC ad videos, static ad creatives, Virality Analysis, and Meta Ads Library research via the eComrads MCP server.",
   "homepage": "https://ecomrads.com",
   "repository": "https://github.com/ecomrads/skills",
   "license": "MIT",
   "skills": [
     "ecomrads-product-photoshoot",
+    "ecomrads-storyboard",
     "ecomrads-product-video",
     "ecomrads-ugc-video",
     "ecomrads-static-ads",

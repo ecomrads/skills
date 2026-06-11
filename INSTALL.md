@@ -1,15 +1,16 @@
 # Install eComrads Skills
 
-Six skills ship in this repo:
+Seven skills ship in this repo:
 
 - **`ecomrads-product-photoshoot`** — brand-quality product images & edits (studio, lifestyle, hero, try-on, restyle)
+- **`ecomrads-storyboard`** — multi-angle 9-shot product storyboard (consistent angle views from one image)
 - **`ecomrads-product-video`** — animate a product still into motion (image-to-video, no presenter)
 - **`ecomrads-ugc-video`** — UGC-style creator video (testimonial, unboxing, how-to, vlog)
 - **`ecomrads-static-ads`** — static / carousel ad creatives + recreate a competitor ad
 - **`ecomrads-virality-analysis`** — analyze a finished ad (image or video) and predict performance
 - **`ecomrads-competitor-spy`** — Meta Ads Library research
 
-They chain: **competitor-spy** → feed a reference into **static-ads** (`recreate_similar_ad`); **product-photoshoot** → use the still as a start frame for **product-video** / **ugc-video**; any creative → **virality-analysis** to validate.
+They chain: **competitor-spy** → feed a reference into **static-ads** (`recreate_similar_ad`); **product-photoshoot** → use the still as a start frame for **product-video** / **ugc-video**; **storyboard** generates 9 angle views of one product; any creative → **virality-analysis** to validate.
 
 ## Prerequisite — connect the eComrads MCP server
 
@@ -31,7 +32,7 @@ Works with Claude Code, Cursor, Codex, and any agent that loads `SKILL.md` skill
 npx skills add ecomrads/skills
 ```
 
-Installs all six skills; the `skills` CLI auto-detects the host agent and writes each skill to the right path.
+Installs all seven skills; the `skills` CLI auto-detects the host agent and writes each skill to the right path.
 
 ## Option 2 — `gh skill install`
 
@@ -50,7 +51,7 @@ Inside Claude Code:
 /plugin install ecomrads@ecomrads
 ```
 
-Registers all six skills as `/ecomrads:product-photoshoot`, `/ecomrads:product-video`, `/ecomrads:ugc-video`, `/ecomrads:static-ads`, `/ecomrads:virality-analysis`, `/ecomrads:competitor-spy`.
+Registers all seven skills as `/ecomrads:product-photoshoot`, `/ecomrads:storyboard`, `/ecomrads:product-video`, `/ecomrads:ugc-video`, `/ecomrads:static-ads`, `/ecomrads:virality-analysis`, `/ecomrads:competitor-spy`.
 
 ## Option 4 — Setup script
 

@@ -8,13 +8,18 @@
     {
       "name": "ecomrads",
       "source": "./",
-      "description": "Product photoshoots, product & UGC ad videos, static ad creatives, Virality Analysis, and competitor research via the eComrads MCP server.",
-      "version": "0.2.0",
+      "description": "Product photoshoots, multi-angle storyboards, product & UGC ad videos, static ad creatives, Virality Analysis, and competitor research via the eComrads MCP server.",
+      "version": "0.3.0",
       "skills": [
         {
           "name": "product-photoshoot",
           "path": "ecomrads-product-photoshoot",
           "invoke": "/ecomrads:product-photoshoot"
+        },
+        {
+          "name": "storyboard",
+          "path": "ecomrads-storyboard",
+          "invoke": "/ecomrads:storyboard"
         },
         {
           "name": "product-video",
